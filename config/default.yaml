@@ -1,0 +1,66 @@
+# Multi-Objective Reinforcement Learning Configuration
+
+# Environment settings
+environment:
+  name: "line"  # Options: line, cartpole, mountaincar
+  goal_position: 10
+  max_position: 10
+  action_space_size: 5
+  energy_penalty_factor: 0.1
+
+# Agent settings
+agent:
+  type: "qlearning"  # Options: qlearning, dqn, ppo
+  weights: [1.0, 0.5]  # Weight vector for combining objectives
+  
+  # Q-learning specific
+  learning_rate: 0.1
+  discount_factor: 0.95
+  epsilon: 0.2
+  epsilon_decay: 0.995
+  epsilon_min: 0.01
+  
+  # DQN specific
+  hidden_dim: 128
+  buffer_size: 10000
+  batch_size: 32
+  target_update_freq: 100
+  
+  # PPO specific
+  n_steps: 2048
+  n_epochs: 10
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_range: 0.2
+  ent_coef: 0.0
+  vf_coef: 0.5
+  max_grad_norm: 0.5
+
+# Training settings
+training:
+  max_episodes: 1000
+  max_steps_per_episode: 1000
+  eval_frequency: 100
+  save_frequency: 500
+  eval_episodes: 10
+
+# Logging settings
+logging:
+  log_dir: "logs"
+  use_wandb: false
+  use_tensorboard: true
+  project_name: "multi-objective-rl"
+
+# Checkpointing
+checkpointing:
+  checkpoint_dir: "checkpoints"
+  save_best: true
+  save_frequency: 500
+
+# Visualization
+visualization:
+  plot_training_curves: true
+  plot_reward_components: true
+  plot_policy_heatmap: true
+  save_plots: true
+  plot_dir: "plots"
